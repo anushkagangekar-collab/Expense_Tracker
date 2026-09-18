@@ -1,72 +1,105 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker</title>
+
+    <title>Expense Tracker - Home</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Expense Tracker</h1>
-            <p>Manage your daily expenses easily</p>
-        </header>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Expense Tracker</div>
 
-        <div class="summary">
-            <div class="card">
-                <h3>Total Expense</h3>
-                <h2 id="total">₹0.00</h2>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="add-expense.html">Add Expense</a>
+            <a href="history.html">History</a>
+            <a href="reports.html">Reports</a>
+        </nav>
+    </header>
+
+
+    <!-- Home Section -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <h1>Manage Your Money Easily</h1>
+
+                <p>
+                    Track your income and expenses in one simple place.
+                    Manage your daily money and understand your spending.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="dashboard.html" class="btn">
+                        View Dashboard
+                    </a>
+
+                    <a href="add-expense.html" class="btn secondary-btn">
+                        Add Expense
+                    </a>
+
+                </div>
+
             </div>
 
-            <div class="card">
-                <h3>Total Transactions</h3>
-                <h2 id="count">0</h2>
+        </section>
+
+
+        <!-- Features -->
+        <section class="features">
+
+            <h2>Why Use Expense Tracker?</h2>
+
+            <div class="feature-container">
+
+                <div class="feature-card">
+                    <h3>💰 Track Income</h3>
+                    <p>
+                        Add and manage your income easily.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>💸 Track Expenses</h3>
+                    <p>
+                        Keep a record of your daily expenses.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📊 View Reports</h3>
+                    <p>
+                        Check your spending and financial summary.
+                    </p>
+                </div>
+
             </div>
-        </div>
 
-        <div class="form-box">
-            <h2>Add New Expense</h2>
+        </section>
 
-            <form id="expenseForm">
-                <label for="name">Expense Name</label>
-                <input type="text" id="name"
-                       placeholder="Enter expense name" required>
+    </main>
 
-                <label for="amount">Amount (₹)</label>
-                <input type="number" id="amount"
-                       placeholder="Enter amount"
-                       min="0.01" step="0.01" required>
 
-                <label for="category">Category</label>
-                <select id="category" required>
-                    <option value="">Select Category</option>
-                    <option value="Food">Food</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Shopping">Shopping</option>
-                    <option value="Bills">Bills</option>
-                    <option value="Other">Other</option>
-                </select>
+    <!-- Footer -->
+    <footer>
+        <p>
+            © 2026 Expense Tracker | JavaScript Group Project
+        </p>
+    </footer>
 
-                <label for="date">Date</label>
-                <input type="date" id="date" required>
-
-                <button type="submit">Add Expense</button>
-            </form>
-        </div>
-
-        <div class="expense-box">
-            <h2>Expense History</h2>
-
-            <div id="expenseList">
-                <p class="empty">No expenses added yet.</p>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
+
 </body>
 </html>

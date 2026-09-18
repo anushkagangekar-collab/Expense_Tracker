@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracker - Reports</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="logo">
+            Expense Tracker
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="add-expense.html">Add Expense</a>
+            <a href="history.html">History</a>
+            <a href="reports.html" class="active">Reports</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Reports -->
+    <main class="container">
+
+        <h1 class="page-title">
+            Expense Reports
+        </h1>
+
+
+        <!-- Report Cards -->
+        <section class="summary">
+
+            <div class="summary-card income-card">
+
+                <h3>Total Income</h3>
+
+                <p id="reportIncome">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card expense-card">
+
+                <h3>Total Expense</h3>
+
+                <p id="reportExpense">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card balance-card">
+
+                <h3>Balance</h3>
+
+                <p id="reportBalance">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Total Transactions</h3>
+
+                <p id="reportCount">
+                    0
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Category Report -->
+        <section class="section-box">
+
+            <h2>Expense by Category</h2>
+
+            <div id="categoryReport">
+
+                <p class="empty-message">
+                    No expense data available.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>
+            © 2026 Expense Tracker | JavaScript Group Project
+        </p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

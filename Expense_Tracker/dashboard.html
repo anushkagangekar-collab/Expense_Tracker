@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracker - Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="logo">
+            Expense Tracker
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="add-expense.html">Add Expense</a>
+            <a href="history.html">History</a>
+            <a href="reports.html">Reports</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Dashboard -->
+    <main class="container">
+
+        <h1 class="page-title">
+            Dashboard
+        </h1>
+
+
+        <!-- Summary Cards -->
+        <section class="summary">
+
+            <div class="summary-card income-card">
+
+                <h3>Total Income</h3>
+
+                <p id="dashboardIncome">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card expense-card">
+
+                <h3>Total Expense</h3>
+
+                <p id="dashboardExpense">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card balance-card">
+
+                <h3>Available Balance</h3>
+
+                <p id="dashboardBalance">
+                    ₹0
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Quick Actions -->
+        <section class="quick-section">
+
+            <h2>Quick Actions</h2>
+
+            <div class="quick-buttons">
+
+                <a href="add-expense.html" class="btn">
+                    + Add Transaction
+                </a>
+
+                <a href="history.html" class="btn secondary-btn">
+                    View History
+                </a>
+
+                <a href="reports.html" class="btn secondary-btn">
+                    View Reports
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- Recent Transactions -->
+        <section class="section-box">
+
+            <h2>Recent Transactions</h2>
+
+            <div id="dashboardTransactions">
+
+                <p class="empty-message">
+                    No transactions added yet.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>
+            © 2026 Expense Tracker | JavaScript Group Project
+        </p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
