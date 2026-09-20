@@ -21,7 +21,7 @@ body {
 ========================= */
 
 .header {
-    background-color: #176b55;
+    background-color: #273c75;
     color: white;
     padding: 20px 6%;
 
@@ -80,7 +80,7 @@ nav a.active {
 
 .hero h1 {
     font-size: 45px;
-    color: #176b55;
+    color: #273c75;
     margin-bottom: 20px;
 }
 
@@ -105,7 +105,7 @@ nav a.active {
 .btn {
     display: inline-block;
 
-    background-color: #176b55;
+    background-color: #273c75;
     color: white;
 
     text-decoration: none;
@@ -122,7 +122,7 @@ nav a.active {
 }
 
 .btn:hover {
-    background-color: #10513f;
+    background-color: #273c75;
 }
 
 .secondary-btn {
@@ -147,7 +147,7 @@ nav a.active {
 }
 
 .features h2 {
-    color: #176b55;
+    color: #273c75;
     margin-bottom: 30px;
 }
 
@@ -190,7 +190,7 @@ nav a.active {
 }
 
 .page-title {
-    color: #176b55;
+    color: #273c75;
 
     text-align: center;
 
@@ -247,7 +247,7 @@ nav a.active {
 }
 
 .balance-card p {
-    color: #176b55;
+    color: #273c75;
 }
 
 
@@ -271,7 +271,7 @@ nav a.active {
 }
 
 .form-box h2 {
-    color: #176b55;
+    color: #273c75;
 
     margin-bottom: 25px;
 }
@@ -307,7 +307,7 @@ nav a.active {
 .form-group select:focus {
     outline: none;
 
-    border-color: #176b55;
+    border-color: #273c75;
 }
 
 .submit-btn {
@@ -333,7 +333,7 @@ nav a.active {
 }
 
 .section-box h2 {
-    color: #176b55;
+    color: #273c75;
 
     margin-bottom: 20px;
 }
@@ -359,7 +359,7 @@ nav a.active {
 }
 
 .quick-section h2 {
-    color: #176b55;
+    color: #273c75;
 
     margin-bottom: 20px;
 }
