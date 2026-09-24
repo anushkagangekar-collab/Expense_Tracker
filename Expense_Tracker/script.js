@@ -1,92 +1,167 @@
-/* =================================
-   EXPENSE TRACKER JAVASCRIPT
-================================= */
+/* =====================================
+   Expense Tracker JavaScript
+===================================== */
 
 
-/* =================================
-   GET TRANSACTIONS
-================================= */
+/* =====================================
+   Get Transactions From Local Storage
+===================================== */
 
-let transactions = JSON.parse(
-    localStorage.getItem("transactions")
-) || [];
+function getTransactions() {
+
+    const data = localStorage.getItem("transactions");
+
+    if (data) {
+        return JSON.parse(data);
+    }
+
+    return [];
+}
 
 
-/* =================================
-   SAVE TRANSACTIONS
-================================= */
+/* =====================================
+   Save Transactions
+===================================== */
 
-function saveTransactions() {
+function saveTransactions(transactions) {
 
     localStorage.setItem(
         "transactions",
         JSON.stringify(transactions)
     );
-
 }
 
 
-/* =================================
-   FORMAT MONEY
-================================= */
+/* =====================================
+   Format Amount
+===================================== */
 
 function formatAmount(amount) {
 
-    return new Intl.NumberFormat("en-IN", {
-
-        style: "currency",
-
-        currency: "INR",
-
-        maximumFractionDigits: 2
-
-    }).format(amount);
-
+    return "₹" + Number(amount).toLocaleString("en-IN");
 }
 
 
-/* =================================
-   CALCULATE TOTALS
-================================= */
+/* =====================================
+   Calculate Totals
+===================================== */
 
 function calculateTotals() {
 
+    const transactions = getTransactions();
+
     let income = 0;
-
     let expense = 0;
-
 
     transactions.forEach(function(transaction) {
 
         if (transaction.type === "income") {
 
-            income += transaction.amount;
+            income += Number(transaction.amount);
 
         } else {
 
-            expense += transaction.amount;
+            expense += Number(transaction.amount);
 
         }
 
     });
 
+    const balance = income - expense;
 
     return {
-
         income: income,
-
         expense: expense,
-
-        balance: income - expense
-
+        balance: balance
     };
+}
+
+
+/* =====================================
+   Add Transaction
+===================================== */
+
+const expenseForm = document.getElementById("expenseForm");
+
+if (expenseForm) {
+
+    expenseForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const title =
+            document.getElementById("title").value.trim();
+
+        const amount =
+            document.getElementById("amount").value;
+
+        const type =
+            document.getElementById("type").value;
+
+        const category =
+            document.getElementById("category").value;
+
+        const date =
+            document.getElementById("date").value;
+
+
+        if (
+            title === "" ||
+            amount === "" ||
+            type === "" ||
+            category === "" ||
+            date === ""
+        ) {
+
+            alert("Please fill all fields.");
+
+            return;
+        }
+
+
+        const transactions = getTransactions();
+
+
+        const newTransaction = {
+
+            id: Date.now(),
+
+            title: title,
+
+            amount: Number(amount),
+
+            type: type,
+
+            category: category,
+
+            date: date
+
+        };
+
+
+        transactions.push(newTransaction);
+
+
+        saveTransactions(transactions);
+
+
+        alert("Transaction added successfully!");
+
+
+        expenseForm.reset();
+
+
+        window.location.href = "history.html";
+
+    });
 
 }
 
 
-/* =================================
-   DASHBOARD
-================================= */
+/* =====================================
+   Update Dashboard
+===================================== */
 
 function updateDashboard() {
 
@@ -100,7 +175,12 @@ function updateDashboard() {
         document.getElementById("dashboardBalance");
 
 
-    if (!incomeElement) {
+    if (
+        !incomeElement ||
+        !expenseElement ||
+        !balanceElement
+    ) {
+
         return;
     }
 
@@ -123,418 +203,226 @@ function updateDashboard() {
 }
 
 
-/* =================================
-   DASHBOARD RECENT TRANSACTIONS
-================================= */
+/* =====================================
+   Dashboard Transactions
+===================================== */
 
 function displayDashboardTransactions() {
 
-    const list =
-        document.getElementById(
-            "dashboardTransactions"
-        );
+    const container =
+        document.getElementById("dashboardTransactions");
 
 
-    if (!list) {
+    if (!container) {
         return;
     }
 
 
-    list.innerHTML = "";
+    const transactions = getTransactions();
 
 
     if (transactions.length === 0) {
 
-        list.innerHTML =
-            '<p class="empty-message">' +
-            'No transactions added yet.' +
-            '</p>';
+        container.innerHTML = `
+            <p class="empty-message">
+                No transactions available.
+            </p>
+        `;
 
         return;
-
     }
 
-
-    // Show latest 5 transactions
 
     const recentTransactions =
         transactions.slice(-5).reverse();
 
 
-    recentTransactions.forEach(
-        function(transaction) {
-
-            const item =
-                createTransactionElement(
-                    transaction,
-                    false
-                );
-
-            list.appendChild(item);
-
-        }
-    );
-
-}
+    container.innerHTML = "";
 
 
-/* =================================
-   CREATE TRANSACTION ELEMENT
-================================= */
+    recentTransactions.forEach(function(transaction) {
 
-function createTransactionElement(
-    transaction,
-    showDelete
-) {
-
-    const item =
-        document.createElement("div");
-
-    item.className = "transaction";
+        const amountClass =
+            transaction.type === "income"
+                ? "income-amount"
+                : "expense-amount";
 
 
-    const info =
-        document.createElement("div");
-
-    info.className = "transaction-info";
-
-
-    const name =
-        document.createElement("h3");
-
-    name.textContent =
-        transaction.title;
+        const sign =
+            transaction.type === "income"
+                ? "+"
+                : "-";
 
 
-    const details =
-        document.createElement("p");
-
-    details.textContent =
-        transaction.category +
-        " | " +
-        transaction.date;
+        const item =
+            document.createElement("div");
 
 
-    info.appendChild(name);
-
-    info.appendChild(details);
-
-
-    const right =
-        document.createElement("div");
-
-    right.className =
-        "transaction-right";
+        item.className =
+            "transaction-item";
 
 
-    const amount =
-        document.createElement("span");
+        item.innerHTML = `
 
-    amount.className =
-        "transaction-amount";
+            <div class="transaction-info">
 
+                <h3>
+                    ${transaction.title}
+                </h3>
 
-    if (transaction.type === "income") {
+                <p>
+                    ${transaction.category}
+                    | ${transaction.date}
+                </p>
 
-        amount.classList.add(
-            "income-text"
-        );
+            </div>
 
-        amount.textContent =
-            "+ " +
-            formatAmount(transaction.amount);
+            <div class="transaction-amount ${amountClass}">
+                ${sign}${formatAmount(transaction.amount)}
+            </div>
 
-    } else {
-
-        amount.classList.add(
-            "expense-text"
-        );
-
-        amount.textContent =
-            "- " +
-            formatAmount(transaction.amount);
-
-    }
+        `;
 
 
-    right.appendChild(amount);
+        container.appendChild(item);
 
-
-    /* Delete Button */
-
-    if (showDelete) {
-
-        const deleteButton =
-            document.createElement("button");
-
-        deleteButton.className =
-            "delete-btn";
-
-        deleteButton.textContent =
-            "Delete";
-
-
-        deleteButton.addEventListener(
-            "click",
-            function() {
-
-                deleteTransaction(
-                    transaction.id
-                );
-
-            }
-        );
-
-
-        right.appendChild(
-            deleteButton
-        );
-
-    }
-
-
-    item.appendChild(info);
-
-    item.appendChild(right);
-
-
-    return item;
+    });
 
 }
 
 
-/* =================================
-   ADD TRANSACTION
-================================= */
-
-const expenseForm =
-    document.getElementById(
-        "expenseForm"
-    );
-
-
-if (expenseForm) {
-
-    const dateInput =
-        document.getElementById("date");
-
-
-    /* Set today's date */
-
-    if (dateInput) {
-
-        dateInput.value =
-            new Date()
-            .toLocaleDateString("en-CA");
-
-    }
-
-
-    expenseForm.addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
-
-
-            const title =
-                document
-                .getElementById("title")
-                .value
-                .trim();
-
-
-            const amount =
-                Number(
-                    document
-                    .getElementById("amount")
-                    .value
-                );
-
-
-            const type =
-                document
-                .getElementById("type")
-                .value;
-
-
-            const category =
-                document
-                .getElementById("category")
-                .value;
-
-
-            const date =
-                document
-                .getElementById("date")
-                .value;
-
-
-            /* Validation */
-
-            if (
-                title === "" ||
-                !Number.isFinite(amount) ||
-                amount <= 0 ||
-                date === ""
-            ) {
-
-                alert(
-                    "Please enter valid details."
-                );
-
-                return;
-
-            }
-
-
-            /* Create Transaction */
-
-            const transaction = {
-
-                id: Date.now(),
-
-                title: title,
-
-                amount: amount,
-
-                type: type,
-
-                category: category,
-
-                date: date
-
-            };
-
-
-            /* Add to array */
-
-            transactions.push(
-                transaction
-            );
-
-
-            /* Save */
-
-            saveTransactions();
-
-
-            alert(
-                "Transaction added successfully!"
-            );
-
-
-            /* Reset form */
-
-            expenseForm.reset();
-
-
-            /* Set date again */
-
-            if (dateInput) {
-
-                dateInput.value =
-                    new Date()
-                    .toLocaleDateString(
-                        "en-CA"
-                    );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =================================
-   HISTORY PAGE
-================================= */
+/* =====================================
+   Display History
+===================================== */
 
 function displayHistory() {
 
-    const historyList =
-        document.getElementById(
-            "historyList"
-        );
+    const container =
+        document.getElementById("historyList");
 
 
-    if (!historyList) {
+    if (!container) {
         return;
     }
 
 
-    historyList.innerHTML = "";
+    const transactions = getTransactions();
 
 
     if (transactions.length === 0) {
 
-        historyList.innerHTML =
-            '<p class="empty-message">' +
-            'No transactions added yet.' +
-            '</p>';
+        container.innerHTML = `
+            <p class="empty-message">
+                No transactions available.
+                <br><br>
+                Add your first transaction.
+            </p>
+        `;
 
         return;
-
     }
 
 
-    /* Latest transaction first */
+    container.innerHTML = "";
+
 
     const sortedTransactions =
         [...transactions].reverse();
 
 
-    sortedTransactions.forEach(
-        function(transaction) {
+    sortedTransactions.forEach(function(transaction) {
 
-            const item =
-                createTransactionElement(
-                    transaction,
-                    true
-                );
+        const amountClass =
+            transaction.type === "income"
+                ? "income-amount"
+                : "expense-amount";
 
-            historyList.appendChild(
-                item
-            );
 
-        }
-    );
+        const sign =
+            transaction.type === "income"
+                ? "+"
+                : "-";
+
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "transaction-item";
+
+
+        item.innerHTML = `
+
+            <div class="transaction-info">
+
+                <h3>
+                    ${transaction.title}
+                </h3>
+
+                <p>
+                    Category: ${transaction.category}
+                    <br>
+                    Date: ${transaction.date}
+                    <br>
+                    Type: ${transaction.type}
+                </p>
+
+            </div>
+
+
+            <div class="transaction-amount ${amountClass}">
+                ${sign}${formatAmount(transaction.amount)}
+            </div>
+
+
+            <button
+                class="delete-btn"
+                onclick="deleteTransaction(${transaction.id})">
+
+                Delete
+
+            </button>
+
+        `;
+
+
+        container.appendChild(item);
+
+    });
 
 }
 
 
-/* =================================
-   DELETE TRANSACTION
-================================= */
+/* =====================================
+   Delete Transaction
+===================================== */
 
 function deleteTransaction(id) {
 
-    const confirmDelete =
-        confirm(
-            "Are you sure you want to delete this transaction?"
-        );
+    const confirmation =
+        confirm("Are you sure you want to delete this transaction?");
 
 
-    if (!confirmDelete) {
+    if (!confirmation) {
         return;
     }
 
 
+    let transactions =
+        getTransactions();
+
+
     transactions =
-        transactions.filter(
-            function(transaction) {
+        transactions.filter(function(transaction) {
 
-                return transaction.id !== id;
+            return transaction.id !== id;
 
-            }
-        );
+        });
 
 
-    saveTransactions();
+    saveTransactions(transactions);
 
-
-    /* Refresh page data */
 
     displayHistory();
 
@@ -545,39 +433,38 @@ function deleteTransaction(id) {
 }
 
 
-/* =================================
-   REPORTS
-================================= */
+/* =====================================
+   Display Reports
+===================================== */
 
 function displayReports() {
 
     const incomeElement =
-        document.getElementById(
-            "reportIncome"
-        );
+        document.getElementById("reportIncome");
+
+    const expenseElement =
+        document.getElementById("reportExpense");
+
+    const balanceElement =
+        document.getElementById("reportBalance");
+
+    const countElement =
+        document.getElementById("reportCount");
 
 
-    if (!incomeElement) {
+    if (
+        !incomeElement ||
+        !expenseElement ||
+        !balanceElement ||
+        !countElement
+    ) {
+
         return;
     }
 
 
-    const expenseElement =
-        document.getElementById(
-            "reportExpense"
-        );
-
-
-    const balanceElement =
-        document.getElementById(
-            "reportBalance"
-        );
-
-
-    const countElement =
-        document.getElementById(
-            "reportCount"
-        );
+    const transactions =
+        getTransactions();
 
 
     const totals =
@@ -585,21 +472,15 @@ function displayReports() {
 
 
     incomeElement.textContent =
-        formatAmount(
-            totals.income
-        );
+        formatAmount(totals.income);
 
 
     expenseElement.textContent =
-        formatAmount(
-            totals.expense
-        );
+        formatAmount(totals.expense);
 
 
     balanceElement.textContent =
-        formatAmount(
-            totals.balance
-        );
+        formatAmount(totals.balance);
 
 
     countElement.textContent =
@@ -611,137 +492,110 @@ function displayReports() {
 }
 
 
-/* =================================
-   CATEGORY REPORT
-================================= */
+/* =====================================
+   Category Report
+===================================== */
 
 function displayCategoryReport() {
 
-    const categoryReport =
-        document.getElementById(
-            "categoryReport"
-        );
+    const container =
+        document.getElementById("categoryReport");
 
 
-    if (!categoryReport) {
+    if (!container) {
         return;
     }
 
 
-    categoryReport.innerHTML = "";
+    const transactions =
+        getTransactions();
 
 
-    /* Store category totals */
+    const expenses =
+        transactions.filter(function(transaction) {
 
-    const categories = {};
+            return transaction.type === "expense";
 
-
-    transactions.forEach(
-        function(transaction) {
-
-            if (
-                transaction.type ===
-                "expense"
-            ) {
-
-                if (
-                    !categories[
-                        transaction.category
-                    ]
-                ) {
-
-                    categories[
-                        transaction.category
-                    ] = 0;
-
-                }
+        });
 
 
-                categories[
-                    transaction.category
-                ] += transaction.amount;
+    if (expenses.length === 0) {
 
-            }
-
-        }
-    );
-
-
-    const categoryNames =
-        Object.keys(categories);
-
-
-    if (categoryNames.length === 0) {
-
-        categoryReport.innerHTML =
-            '<p class="empty-message">' +
-            'No expense data available.' +
-            '</p>';
+        container.innerHTML = `
+            <p class="empty-message">
+                No expense data available.
+            </p>
+        `;
 
         return;
-
     }
 
 
-    categoryNames.forEach(
-        function(category) {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-            item.className =
-                "category-item";
+    const categoryTotals = {};
 
 
-            const name =
-                document.createElement(
-                    "span"
-                );
+    expenses.forEach(function(transaction) {
 
-            name.className =
-                "category-name";
-
-            name.textContent =
-                category;
+        const category =
+            transaction.category;
 
 
-            const amount =
-                document.createElement(
-                    "span"
-                );
+        if (!categoryTotals[category]) {
 
-            amount.className =
-                "category-amount";
-
-            amount.textContent =
-                formatAmount(
-                    categories[category]
-                );
-
-
-            item.appendChild(name);
-
-            item.appendChild(amount);
-
-
-            categoryReport.appendChild(
-                item
-            );
+            categoryTotals[category] = 0;
 
         }
-    );
+
+
+        categoryTotals[category] +=
+            Number(transaction.amount);
+
+    });
+
+
+    container.innerHTML = "";
+
+
+    Object.keys(categoryTotals).forEach(function(category) {
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "category-item";
+
+
+        item.innerHTML = `
+
+            <span class="category-name">
+                ${category}
+            </span>
+
+            <span class="category-amount">
+                ${formatAmount(categoryTotals[category])}
+            </span>
+
+        `;
+
+
+        container.appendChild(item);
+
+    });
 
 }
 
 
-/* =================================
-   RUN FUNCTIONS
-================================= */
+/* =====================================
+   Initialize
+===================================== */
 
-displayHistory();
+document.addEventListener("DOMContentLoaded", function() {
 
-updateDashboard();
+    displayHistory();
 
-displayReports();
+    updateDashboard();
+
+    displayReports();
+
+});

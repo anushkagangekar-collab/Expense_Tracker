@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Expense Tracker - Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -30,45 +33,57 @@
 
 
     <!-- Dashboard -->
-    <main class="container">
+    <main class="page-container">
 
-        <h1 class="page-title">
-            Dashboard
-        </h1>
+        <div class="page-heading">
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Get a quick overview of your money.
+            </p>
+
+        </div>
 
 
         <!-- Summary Cards -->
-        <section class="summary">
+        <section class="summary-container">
 
             <div class="summary-card income-card">
 
+                <div class="card-icon">💰</div>
+
                 <h3>Total Income</h3>
 
-                <p id="dashboardIncome">
+                <h2 id="dashboardIncome">
                     ₹0
-                </p>
+                </h2>
 
             </div>
 
 
             <div class="summary-card expense-card">
 
-                <h3>Total Expense</h3>
+                <div class="card-icon">💸</div>
 
-                <p id="dashboardExpense">
+                <h3>Total Expenses</h3>
+
+                <h2 id="dashboardExpense">
                     ₹0
-                </p>
+                </h2>
 
             </div>
 
 
             <div class="summary-card balance-card">
 
-                <h3>Available Balance</h3>
+                <div class="card-icon">💳</div>
 
-                <p id="dashboardBalance">
+                <h3>Balance</h3>
+
+                <h2 id="dashboardBalance">
                     ₹0
-                </p>
+                </h2>
 
             </div>
 
@@ -83,15 +98,15 @@
             <div class="quick-buttons">
 
                 <a href="add-expense.html" class="btn">
-                    + Add Transaction
+                    ➕ Add Transaction
                 </a>
 
                 <a href="history.html" class="btn secondary-btn">
-                    View History
+                    📋 View History
                 </a>
 
                 <a href="reports.html" class="btn secondary-btn">
-                    View Reports
+                    📊 View Reports
                 </a>
 
             </div>
@@ -100,14 +115,14 @@
 
 
         <!-- Recent Transactions -->
-        <section class="section-box">
+        <section class="transaction-section">
 
             <h2>Recent Transactions</h2>
 
-            <div id="dashboardTransactions">
+            <div id="dashboardTransactions" class="transaction-list">
 
                 <p class="empty-message">
-                    No transactions added yet.
+                    No transactions available.
                 </p>
 
             </div>
@@ -118,13 +133,16 @@
 
 
     <footer>
+
         <p>
             © 2026 Expense Tracker | JavaScript Group Project
         </p>
+
     </footer>
 
 
     <script src="script.js"></script>
 
 </body>
+
 </html>

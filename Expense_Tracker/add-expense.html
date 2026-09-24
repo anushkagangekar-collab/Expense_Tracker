@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Expense Tracker - Add Expense</title>
+    <title>Expense Tracker - Add Transaction</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -29,42 +32,43 @@
     </header>
 
 
-    <!-- Add Transaction -->
-    <main class="container">
+    <main class="page-container">
 
-        <h1 class="page-title">
-            Add Transaction
-        </h1>
+        <div class="page-heading">
+
+            <h1>Add Transaction</h1>
+
+            <p>
+                Add your income or expense details.
+            </p>
+
+        </div>
 
 
-        <section class="form-box">
-
-            <h2>Enter Transaction Details</h2>
+        <!-- Form -->
+        <section class="form-section">
 
             <form id="expenseForm">
 
-                <!-- Transaction Name -->
                 <div class="form-group">
 
                     <label for="title">
-                        Transaction Name
+                        Transaction Title
                     </label>
 
                     <input
                         type="text"
                         id="title"
-                        placeholder="Example: Food, Salary, Travel"
-                        required
-                    >
+                        placeholder="Example: Grocery Shopping"
+                        required>
 
                 </div>
 
 
-                <!-- Amount -->
                 <div class="form-group">
 
                     <label for="amount">
-                        Amount (₹)
+                        Amount
                     </label>
 
                     <input
@@ -72,14 +76,11 @@
                         id="amount"
                         placeholder="Enter amount"
                         min="1"
-                        step="0.01"
-                        required
-                    >
+                        required>
 
                 </div>
 
 
-                <!-- Type -->
                 <div class="form-group">
 
                     <label for="type">
@@ -87,6 +88,10 @@
                     </label>
 
                     <select id="type" required>
+
+                        <option value="">
+                            Select Type
+                        </option>
 
                         <option value="expense">
                             Expense
@@ -101,7 +106,6 @@
                 </div>
 
 
-                <!-- Category -->
                 <div class="form-group">
 
                     <label for="category">
@@ -109,6 +113,10 @@
                     </label>
 
                     <select id="category" required>
+
+                        <option value="">
+                            Select Category
+                        </option>
 
                         <option value="Food">
                             Food
@@ -143,7 +151,6 @@
                 </div>
 
 
-                <!-- Date -->
                 <div class="form-group">
 
                     <label for="date">
@@ -153,18 +160,13 @@
                     <input
                         type="date"
                         id="date"
-                        required
-                    >
+                        required>
 
                 </div>
 
 
-                <!-- Submit -->
-                <button
-                    type="submit"
-                    class="btn submit-btn"
-                >
-                    Add Transaction
+                <button type="submit" class="btn submit-btn">
+                    Save Transaction
                 </button>
 
             </form>
@@ -175,13 +177,16 @@
 
 
     <footer>
+
         <p>
             © 2026 Expense Tracker | JavaScript Group Project
         </p>
+
     </footer>
 
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
