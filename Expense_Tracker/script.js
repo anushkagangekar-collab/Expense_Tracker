@@ -1,11 +1,3 @@
-/* =====================================
-   Expense Tracker JavaScript
-===================================== */
-
-
-/* =====================================
-   Get Transactions From Local Storage
-===================================== */
 
 function getTransactions() {
 
@@ -19,9 +11,7 @@ function getTransactions() {
 }
 
 
-/* =====================================
-   Save Transactions
-===================================== */
+
 
 function saveTransactions(transactions) {
 
@@ -32,9 +22,6 @@ function saveTransactions(transactions) {
 }
 
 
-/* =====================================
-   Format Amount
-===================================== */
 
 function formatAmount(amount) {
 
@@ -42,9 +29,7 @@ function formatAmount(amount) {
 }
 
 
-/* =====================================
-   Calculate Totals
-===================================== */
+
 
 function calculateTotals() {
 
@@ -77,9 +62,7 @@ function calculateTotals() {
 }
 
 
-/* =====================================
-   Add Transaction
-===================================== */
+
 
 const expenseForm = document.getElementById("expenseForm");
 
@@ -159,9 +142,7 @@ if (expenseForm) {
 }
 
 
-/* =====================================
-   Update Dashboard
-===================================== */
+
 
 function updateDashboard() {
 
@@ -203,9 +184,6 @@ function updateDashboard() {
 }
 
 
-/* =====================================
-   Dashboard Transactions
-===================================== */
 
 function displayDashboardTransactions() {
 
@@ -291,9 +269,7 @@ function displayDashboardTransactions() {
 }
 
 
-/* =====================================
-   Display History
-===================================== */
+
 
 function displayHistory() {
 
@@ -394,9 +370,7 @@ function displayHistory() {
 }
 
 
-/* =====================================
-   Delete Transaction
-===================================== */
+
 
 function deleteTransaction(id) {
 
@@ -433,9 +407,6 @@ function deleteTransaction(id) {
 }
 
 
-/* =====================================
-   Display Reports
-===================================== */
 
 function displayReports() {
 
@@ -492,9 +463,6 @@ function displayReports() {
 }
 
 
-/* =====================================
-   Category Report
-===================================== */
 
 function displayCategoryReport() {
 
@@ -586,9 +554,6 @@ function displayCategoryReport() {
 }
 
 
-/* =====================================
-   Initialize
-===================================== */
 
 document.addEventListener("DOMContentLoaded", function() {
 
