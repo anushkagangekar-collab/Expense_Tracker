@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Expense Tracker - Reports</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -29,57 +32,70 @@
     </header>
 
 
-    <!-- Reports -->
-    <main class="container">
+    <main class="page-container">
 
-        <h1 class="page-title">
-            Expense Reports
-        </h1>
+        <div class="page-heading">
+
+            <h1>Financial Reports</h1>
+
+            <p>
+                Understand your income and spending.
+            </p>
+
+        </div>
 
 
         <!-- Report Cards -->
-        <section class="summary">
+        <section class="summary-container">
 
             <div class="summary-card income-card">
 
+                <div class="card-icon">💰</div>
+
                 <h3>Total Income</h3>
 
-                <p id="reportIncome">
+                <h2 id="reportIncome">
                     ₹0
-                </p>
+                </h2>
 
             </div>
 
 
             <div class="summary-card expense-card">
 
-                <h3>Total Expense</h3>
+                <div class="card-icon">💸</div>
 
-                <p id="reportExpense">
+                <h3>Total Expenses</h3>
+
+                <h2 id="reportExpense">
                     ₹0
-                </p>
+                </h2>
 
             </div>
 
 
             <div class="summary-card balance-card">
 
+                <div class="card-icon">💳</div>
+
                 <h3>Balance</h3>
 
-                <p id="reportBalance">
+                <h2 id="reportBalance">
                     ₹0
-                </p>
+                </h2>
 
             </div>
 
 
             <div class="summary-card">
 
+                <div class="card-icon">🧾</div>
+
                 <h3>Total Transactions</h3>
 
-                <p id="reportCount">
+                <h2 id="reportCount">
                     0
-                </p>
+                </h2>
 
             </div>
 
@@ -87,11 +103,11 @@
 
 
         <!-- Category Report -->
-        <section class="section-box">
+        <section class="report-section">
 
-            <h2>Expense by Category</h2>
+            <h2>Expense By Category</h2>
 
-            <div id="categoryReport">
+            <div id="categoryReport" class="category-list">
 
                 <p class="empty-message">
                     No expense data available.
@@ -105,13 +121,16 @@
 
 
     <footer>
+
         <p>
             © 2026 Expense Tracker | JavaScript Group Project
         </p>
+
     </footer>
 
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
